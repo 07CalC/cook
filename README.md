@@ -78,8 +78,8 @@ You can customize this via:
 ```lua
 require("cook").setup({
   runners = {
-    py = "python %s",
-    sh = "bash %s",
+    py = "'python %s'",
+    sh = "'bash %s'",
   },
 })
 ```
