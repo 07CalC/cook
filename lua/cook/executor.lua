@@ -75,6 +75,12 @@ function M.run(cmd)
 		vim.notify("[Cook] Invalid or empty command", vim.log.levels.ERROR)
 		return
 	end
+
+	if string.sub(cmd, 1, 1) == "!" then
+		vim.cmd(string.sub(cmd, 2, -1))
+		return
+	end
+
 	create_floating_terminal(cmd)
 end
 

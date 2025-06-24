@@ -34,7 +34,6 @@ function M.cook(args)
 		table.sort(task_names)
 		vim.ui.select(task_names, { prompt = "Cook task: " }, function(selected_task)
 			if selected_task then
-				print("Selected task: " .. recipes_list[selected_task])
 				executor.run(recipes_list[selected_task])
 				return
 			else
