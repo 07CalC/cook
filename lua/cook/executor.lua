@@ -23,8 +23,10 @@ local function create_floating_terminal(cmd)
 	local col = math.floor((vim.o.columns - width) / 2)
 
 	local buf
+	local is_new_buf
 	if vim.api.nvim_buf_is_valid(M.state.floating.buf) then
 		buf = M.state.floating.buf
+		is_new_buf = true
 	else
 		buf = vim.api.nvim_create_buf(false, true)
 	end
@@ -39,17 +41,19 @@ local function create_floating_terminal(cmd)
 		border = opts.border or "rounded",
 	})
 
-	cmd = string.format("echo -e \"\\x1b[0;32m[RUN]: '%s'\\x1b[0m\\n\"  && %s", cmd, cmd)
-
-	vim.api.nvim_buf_call(buf, function()
-		vim.cmd({ cmd = "term", args = { cmd } })
-	end)
-
-	vim.cmd("startinsert")
-	vim.bo.buflisted = false
-
 	M.state.floating.buf = buf
 	M.state.floating.win = win
+
+	if not is_new_buf then
+		cmd = string.format("echo -e \"\\x1b[0;32m[RUN]: '%s'\\x1b[0m\\n\"  && %s", cmd, cmd)
+
+		vim.api.nvim_buf_call(buf, function()
+			vim.cmd({ cmd = "term", args = { cmd } })
+		end)
+		vim.bo[M.state.floating.buf].buflisted = false
+	end
+
+	vim.cmd("startinsert")
 end
 
 -- toggles the floating terminal
@@ -58,7 +62,7 @@ end
 -- use :Cookt in normal mode to toggle the terminal
 function M.toggle_terminal()
 	if vim.api.nvim_win_is_valid(M.state.floating.win) then
-		vim.api.nvim_win_hide(M.state.floating.win)
+		vim.api.nvim_win_close(M.state.floating.win, true)
 	else
 		if vim.api.nvim_buf_is_valid(M.state.floating.buf) then
 			create_floating_terminal("") -- reopen existing terminal
