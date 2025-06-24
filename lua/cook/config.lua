@@ -8,8 +8,8 @@ local defaults = {
 	},
 	runners = {
 		py = "'python3 %s'",
-		c = "'gcc %s -o %s && .%s'",
-		cpp = "'g++ %s -o %s && .%s'",
+		c = "'gcc %s -o %s && %s'",
+		cpp = "'g++ %s -o %s && %s'",
 		rs = "'cargo run'",
 		js = "'bun %s'",
 		ts = "'bun %s'",

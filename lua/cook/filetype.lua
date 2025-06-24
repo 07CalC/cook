@@ -3,6 +3,7 @@ local config = require("cook.config")
 local M = {}
 
 function M.resolve(filepath)
+	filepath = vim.fn.fnamemodify(filepath, ":p")
 	if type(filepath) ~= "string" then
 		vim.notify("Cook error: invalid filepath", vim.log.levels.ERROR)
 		return nil
@@ -29,7 +30,7 @@ function M.resolve(filepath)
 		local folder = vim.fn.fnamemodify(filepath, ":h")
 		local name = vim.fn.fnamemodify(filepath, ":t:r")
 		local exe = folder .. "/" .. name
-		return string.format(runner, filepath, exe, "/" .. name)
+		return string.format(runner, filepath, exe, exe)
 	end
 
 	return string.format(runner, filepath)
