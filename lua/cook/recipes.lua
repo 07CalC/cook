@@ -1,12 +1,12 @@
 local M = {}
 
-M.load_project_tasks = function()
-  local root = vim.fs.root(0, { "tasks.lua", ".git" })
+M.load_recipes = function()
+  local root = vim.fs.root(0, { "recipes.lua", ".git" })
   if not root then
-    return nill
+    return nil
   end
 
-  local path = root .. "/tasks.lua"
+  local path = root .. "/recipes.lua"
   if vim.fn.filereadable(path) == 0 then
     return nil
   end
@@ -16,7 +16,7 @@ M.load_project_tasks = function()
     return nil
   end
 
-  return data.tasks or nil
+  return data.recipes or nil
 end
 
 return M
