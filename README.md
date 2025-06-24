@@ -26,6 +26,8 @@ Supports:
 - ⚙️ Easily extendable for any language
 - 📦 Define per-project tasks with recipes.lua
 - 🧠 Smart filetype-to-runner resolution
+- 📋 `:Coop` mode for Competitive Programming
+- ❗ Tasks starting with `!` run as native Vim commands — useful for plugins like `cmake-tools.nvim`
 - 💡 Minimal setup, pure Lua
 
 ---
@@ -88,9 +90,12 @@ return{
 	build = "cargo build --release"
 	test = "cargo test"
 	fmt = "cargo fmt"
+	cmake_build = "!CMakeBuild" -- runs as a Vim command
 	}
 }
 ```
+📝 Note:
+ - Commands starting with `!` are executed using `vim.cmd()`, letting you run Vim-native or plugin-provided commands.
 
 
 
