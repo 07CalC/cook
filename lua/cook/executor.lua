@@ -53,7 +53,9 @@ local function create_floating_terminal(cmd)
 end
 
 -- toggles the floating terminal
--- incomplete
+-- If the terminal is already open, it hides it.
+-- use <Esc><Esc> to exit terminal mode
+-- use :Cookt in normal mode to toggle the terminal
 function M.toggle_terminal()
 	if vim.api.nvim_win_is_valid(M.state.floating.win) then
 		vim.api.nvim_win_hide(M.state.floating.win)

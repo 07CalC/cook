@@ -36,8 +36,17 @@ vim.api.nvim_create_user_command("Cook", commands.cook, {
 vim.api.nvim_create_user_command("Coop", commands.Coop, {})
 
 -- not completely implemented yet
-vim.api.nvim_create_user_command("CookToggle", function()
+vim.api.nvim_create_user_command("Cookt", function()
 	require("cook.executor").toggle_terminal()
 end, {})
+
+-- keymaps to toggle the terminal
+vim.keymap.set("n", "<leader><leader>t", function()
+	require("cook.executor").toggle_terminal()
+end, { desc = "Toggle Cook terminal" })
+
+vim.keymap.set("t", "<leader><leader>t", function()
+	require("cook.executor").toggle_terminal()
+end, { desc = "Toggle Cook terminal (terminal mode)" })
 
 return M
