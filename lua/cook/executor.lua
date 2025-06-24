@@ -33,8 +33,10 @@ local function create_floating_terminal(cmd)
 		border = opts.border or "rounded",
 	})
 
+	cmd = string.format("echo -e \"\\x1b[0;32m[RUN]: '%s'\\x1b[0m\\n\"  && %s", cmd, cmd)
+
 	vim.api.nvim_buf_call(buf, function()
-		vim.cmd({ cmd = "term", args = { "bash", "-c", cmd } })
+		vim.cmd({ cmd = "term", args = { cmd } })
 	end)
 
 	vim.cmd("startinsert")

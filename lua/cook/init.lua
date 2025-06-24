@@ -9,16 +9,15 @@ function M.setup(user_config)
 end
 
 function M.cook(args)
+	local tasks_list = tasks.load_project_tasks()
 	local raw = vim.api.nvim_buf_get_name(0)
-	if not raw or raw == "" or raw:match("^%[.+%]$") then
+	if not raw or raw == "" or raw:match("^%[.+%]$") and not tasks_list then
 		vim.notify("Cannot cook unsaved or unnamed buffer.", vim.log.levels.ERROR)
 		return
 	end
 
-	local tasks = tasks.load_project_tasks()
-
-	if args.args and args.args ~= "" and tasks then
-		local task = tasks[args.args]
+	if args.args and args.args ~= "" and tasks_list then
+		local task = tasks_list[args.args]
 		if not task then
 			vim.notify("Task '" .. args.args .. "' not found.", vim.log.levels.ERROR)
 			return
@@ -28,13 +27,13 @@ function M.cook(args)
 		return
 	end
 
-	if tasks then
-		local task_names = vim.tbl_keys(tasks)
+	if tasks_list then
+		local task_names = vim.tbl_keys(tasks_list)
 		table.sort(task_names)
 		vim.ui.select(task_names, { prompt = "Cook task: " }, function(selected_task)
 			if selected_task then
-				print("Selected task: " .. tasks[selected_task])
-				executor.run(tasks[selected_task])
+				print("Selected task: " .. tasks_list[selected_task])
+				executor.run(tasks_list[selected_task])
 				return
 			else
 				vim.notify("No task selected.", vim.log.levels.INFO)

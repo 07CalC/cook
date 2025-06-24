@@ -7,13 +7,13 @@ local defaults = {
 		border = "rounded",
 	},
 	runners = {
-		py = "'python3 %s'",
-		c = "'gcc %s -o %s && .%s'",
-		cpp = "'g++ %s -o %s && .%s'",
-		rs = "'cargo run'",
-		js = "'bun %s'",
-		ts = "'bun %s'",
-		go = "'go run %s'",
+		py = "python3 %s",
+		c = "gcc %s -o %s && .%s",
+		cpp = "g++ %s -o %s && .%s",
+		rs = "cargo run",
+		js = "bun %s",
+		ts = "bun %s",
+		go = "go run %s",
 	},
 }
 
