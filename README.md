@@ -2,7 +2,13 @@
 
 **cook.nvim** is a modular and extensible Neovim plugin that lets you effortlessly compile or run the current file based on its filetype — inside a floating terminal.
 
-![cook nvim demo](https://github.com/user-attachments/assets/e2c8220c-5fea-4b3f-8d14-b136900bbe82)
+### default runner based on file extension
+![default-cook-demo](https://github.com/user-attachments/assets/9564866f-8345-4b3f-9a5d-73b5de85676d)
+### custom project recipes
+![recipes-cook-demo](https://github.com/user-attachments/assets/cb05b37e-b741-4928-883c-26a8780f05f8)
+### `:Coop` auto paste the clipboard, helpful for Competetive Programming
+![coop-cook-demo](https://github.com/user-attachments/assets/fe9dc656-0c1c-4206-84a0-7767f20ef92f)
+
 
 Supports:
 - 🐍 Python
@@ -63,6 +69,8 @@ It will:
 2. Build the appropriate shell command.
 3. Open a floating terminal and run it.
 
+
+
 ### Custom recipes
 If your project has a `recipes.lua` in its root, you can:
 ```vim
@@ -84,6 +92,21 @@ return{
 }
 ```
 
+
+
+### 🧠 CP Mode with `:Coop`
+For the competitive programming guys, this is for you.
+Just copy the input (from a problem description) to clipboard, then run:
+```vim
+:Coop
+```
+It will:
+1. Detect your filetype.
+2. Create a temp file with clipboard contents.
+3. Pipe the input to your program (< input.in).
+4. Show the output in a terminal buffer.
+
+#### No need to manually paste or prepare files!
 ---
 
 ## 🛠️ Supported Languages & Commands
@@ -118,7 +141,8 @@ lua/
     ├── init.lua       -- Entry point
     ├── config.lua     -- Plugin config and default runners
     ├── filetype.lua   -- Filetype-based runner resolution
-    ├── executor.lua   -- Terminal execution 
+    ├── executor.lua   -- Terminal execution
+    ├── commands.lua   -- Maps user commands (Cook, Coop) 
     └── recipes.lua    -- Project-local task loader
 ```
 
