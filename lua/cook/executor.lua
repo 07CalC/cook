@@ -46,6 +46,7 @@ local function create_floating_terminal(cmd)
 	end)
 
 	vim.cmd("startinsert")
+	vim.bo.buflisted = false
 
 	M.state.floating.buf = buf
 	M.state.floating.win = win
