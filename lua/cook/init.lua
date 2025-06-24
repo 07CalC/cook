@@ -22,7 +22,6 @@ function M.cook(args)
 			vim.notify("Task '" .. args.args .. "' not found.", vim.log.levels.ERROR)
 			return
 		end
-		print("Cmd: " .. task)
 		executor.run(task)
 		return
 	end
