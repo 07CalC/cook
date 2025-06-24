@@ -17,6 +17,7 @@ M.state = {
 -- Creates a floating terminal with the given command
 local function create_floating_terminal(cmd)
 	local opts = config.options.float or {}
+	local layout = opts.layout or "float"
 	local width = math.floor(vim.o.columns * opts.width)
 	local height = math.floor(vim.o.lines * opts.height)
 	local row = math.floor((vim.o.lines - height) / 2)
@@ -29,15 +30,28 @@ local function create_floating_terminal(cmd)
 		buf = vim.api.nvim_create_buf(false, true)
 	end
 
-	local win = vim.api.nvim_open_win(buf, true, {
-		relative = "editor",
-		row = row,
-		col = col,
-		width = width,
-		height = height,
-		style = "minimal",
-		border = opts.border or "rounded",
-	})
+	local win
+	if layout == "bottom" then
+		vim.cmd("botright split")
+		win = vim.api.nvim_get_current_win()
+		vim.api.nvim_win_set_height(win, height)
+		vim.api.nvim_win_set_buf(win, buf)
+	elseif layout == "vertical" then
+		vim.cmd("vsplit")
+		win = vim.api.nvim_get_current_win()
+		vim.api.nvim_win_set_width(win, width)
+		vim.api.nvim_win_set_buf(win, buf)
+	else
+		win = vim.api.nvim_open_win(buf, true, {
+			relative = "editor",
+			row = row,
+			col = col,
+			width = width,
+			height = height,
+			style = "minimal",
+			border = opts.border or "rounded",
+		})
+	end
 
 	cmd = string.format("echo -e \"\\x1b[0;32m[RUN]: '%s'\\x1b[0m\\n\"  && %s", cmd, cmd)
 

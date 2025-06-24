@@ -10,6 +10,7 @@ local defaults = {
 		width = 0.8,
 		height = 0.8,
 		border = "rounded",
+		layout = "float", -- or "bottom" (for bottom split), "vertical" (for vertical split)
 	},
 	runners = {
 		py = "python3 %s",
