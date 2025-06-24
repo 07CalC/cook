@@ -151,6 +151,27 @@ require("cook").setup({
 })
 ```
 
+## 🪟 Terminal Layout Options
+By default, `cook.nvim` opens a floating terminal, but you can change this behavior to suit your workflow.
+
+### Available Layouts:
+- `float` → centered floating terminal (default)
+- `bottom` → splits and runs in bottom window
+- `vertical` → opens terminal in a vertical split
+
+### 🔧 Configuration Example
+
+```lua
+require("cook").setup({
+  float = {
+    layout = "float",   -- or "bottom", "vertical"
+    width = 0.8,        -- used for floating and vertical layout
+    height = 0.3,       -- used for floating and bottom layout
+    border = "rounded", -- border style for floating terminal
+  },
+})
+```
+
 ## 📁 File Structure
 
 ```text
