@@ -16,7 +16,7 @@ M.state = {
 
 -- Creates a floating terminal with the given command
 local function create_floating_terminal(cmd)
-	local opts = config.options.float or {}
+	local opts = config.options.terminal or {}
 	local layout = opts.layout or "float"
 	local width = math.floor(vim.o.columns * opts.width)
 	local height = math.floor(vim.o.lines * opts.height)
