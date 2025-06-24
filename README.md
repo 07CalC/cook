@@ -103,6 +103,8 @@ return {
 📝 Note:
 
 - Commands starting with `!` are executed using `vim.cmd()`, letting you run Vim-native or plugin-provided commands.
+- Use keymap `<ESC><ESC>` to leave terminal mode.
+- Use command `:Cookt` or keymap `<leader><leader>t` to toggle terminal.
 
 ### 🧠 CP Mode with `:Coop`
 
