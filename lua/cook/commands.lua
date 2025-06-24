@@ -1,9 +1,16 @@
+-- this module defines commands for the plugin
+
 local recipes = require("cook.recipes")
 local executor = require("cook.executor")
 local filetype = require("cook.filetype")
 
 local M = {}
 
+-- this allows users to run tasks defined in recipes.lua or execute commands based on the current file
+-- @param args table: Arguments passed to the command
+-- args only required if a user defined per-project task is to be executed
+-- example:
+-- M.cook({args = "my_task"})
 function M.cook(args)
 	local recipes_list = recipes.load_recipes()
 	local raw = vim.api.nvim_buf_get_name(0)
@@ -46,6 +53,7 @@ function M.cook(args)
 	executor.run(cmd)
 end
 
+-- this allows users to run the current file with clipboard as input, helpful for CP
 function M.Coop()
 	local raw = vim.api.nvim_buf_get_name(0)
 

@@ -1,7 +1,12 @@
+-- this module executes commands in a floating terminal
+
+-- keymap to exit terminal mode
 vim.keymap.set("t", "<Esc><Esc>", "<c-\\><c-n>")
 local config = require("cook.config")
 
 local M = {}
+
+-- State to keep track of the floating terminal
 M.state = {
 	floating = {
 		win = -1,
@@ -9,6 +14,7 @@ M.state = {
 	},
 }
 
+-- Creates a floating terminal with the given command
 local function create_floating_terminal(cmd)
 	local opts = config.options.float or {}
 	local width = math.floor(vim.o.columns * opts.width)
@@ -45,6 +51,8 @@ local function create_floating_terminal(cmd)
 	M.state.floating.win = win
 end
 
+-- toggles the floating terminal
+-- incomplete
 function M.toggle_terminal()
 	if vim.api.nvim_win_is_valid(M.state.floating.win) then
 		vim.api.nvim_win_hide(M.state.floating.win)
@@ -57,6 +65,10 @@ function M.toggle_terminal()
 	end
 end
 
+-- Runs a command in a floating terminal
+-- @param cmd string: The command to run in the terminal
+-- example:
+-- M.run("python3 /path/to/script.py")
 function M.run(cmd)
 	if type(cmd) ~= "string" or cmd == "" then
 		vim.notify("[Cook] Invalid or empty command", vim.log.levels.ERROR)
