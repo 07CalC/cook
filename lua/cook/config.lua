@@ -6,7 +6,7 @@ local M = {}
 -- default configuration options for the Cook plugin
 -- these can be overridden by the user in their setup function
 local defaults = {
-	float = {
+	terminal = {
 		width = 0.8,
 		height = 0.8,
 		border = "rounded",
