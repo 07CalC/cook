@@ -95,7 +95,7 @@ return{
 
 
 ### 🧠 CP Mode with `:Coop`
-For the competitive programming guys, this is for you.
+Competitive programming guys, this is for you.
 Just copy the input (from a problem description) to clipboard, then run:
 ```vim
 :Coop
