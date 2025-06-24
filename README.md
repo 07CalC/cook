@@ -65,21 +65,21 @@ It will:
 You can configure your own runners, but here are the defaults:
 ```lua
 runners = {
-		py = "'python3 %s'",
-		c = "'gcc %s -o %s && .%s'",
-		cpp = "'g++ %s -o %s && .%s'",
-		rs = "'cargo run'",
-		js = "'bun %s'",
-		ts = "'bun %s'",
-		go = "'go run %s'",
+		py = "python3 %s",
+		c = "gcc %s -o %s && .%s",
+		cpp = "g++ %s -o %s && .%s",
+		rs = "cargo run",
+		js = "bun %s",
+		ts = "bun %s",
+		go = "go run %s",
 	}
 ```
 You can customize this via:
 ```lua
 require("cook").setup({
   runners = {
-    py = "'python %s'",
-    sh = "'bash %s'",
+    py = "python %s",
+    sh = "bash %s",
   },
 })
 ```
