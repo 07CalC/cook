@@ -22,7 +22,7 @@ function M.cook(args)
 	if args.args and args.args ~= "" and recipes_list then
 		local task = recipes_list[args.args]
 		if not task then
-			vim.notify("Task '" .. args.args .. "' not found.", vim.log.levels.ERROR)
+			vim.notify("Recipe '" .. args.args .. "' not found.", vim.log.levels.ERROR)
 			return
 		end
 		executor.run(task)
@@ -30,17 +30,32 @@ function M.cook(args)
 	end
 
 	if recipes_list then
-		local task_names = vim.tbl_keys(recipes_list)
-		table.sort(task_names)
-		vim.ui.select(task_names, { prompt = "Cook task: " }, function(selected_task)
-			if selected_task then
-				executor.run(recipes_list[selected_task])
-				return
+		local recipe_items = {}
+
+		for key, cmd in pairs(recipes_list) do
+			table.insert(recipe_items, {
+				label = string.format("%-10s → %s", key, cmd),
+				cmd = cmd,
+			})
+		end
+
+		table.sort(recipe_items, function(a, b)
+			return a.label < b.label
+		end)
+
+		vim.ui.select(recipe_items, {
+			prompt = "Cook recipe:",
+			format_item = function(item)
+				return item.label
+			end,
+		}, function(choice)
+			if choice then
+				executor.run(choice.cmd)
 			else
-				vim.notify("No task selected.", vim.log.levels.INFO)
-				return
+				vim.notify("No recipe selected.", vim.log.levels.INFO)
 			end
 		end)
+
 		return
 	end
 

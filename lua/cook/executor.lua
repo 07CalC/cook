@@ -74,6 +74,7 @@ end
 -- If the terminal is already open, it hides it.
 -- use <Esc><Esc> to exit terminal mode
 -- use :Cookt in normal mode to toggle the terminal
+-- user can also use keymap `<leader><leader>t` in both normal and terminal modes to toggle
 function M.toggle_terminal()
 	if vim.api.nvim_win_is_valid(M.state.floating.win) then
 		vim.api.nvim_win_close(M.state.floating.win, true)
