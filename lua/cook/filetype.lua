@@ -8,7 +8,6 @@ local M = {}
 -- @param filepath string: The path to the file to be resolved.
 -- example:
 -- M.resolve("/home/calc/Documents/masti/test.c")
-
 function M.resolve(filepath)
 	if type(filepath) ~= "string" then
 		vim.notify("Cook error: invalid filepath", vim.log.levels.ERROR)
@@ -39,7 +38,7 @@ function M.resolve(filepath)
 		local folder = vim.fn.fnamemodify(filepath, ":h")
 		local name = vim.fn.fnamemodify(filepath, ":t:r")
 		local exe = folder .. "/" .. name
-		return string.format(runner, filepath, exe, "/" .. name)
+		return string.format(runner, filepath, exe, "./" .. name)
 	end
 
 	return string.format(runner, filepath)
