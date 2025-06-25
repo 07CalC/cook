@@ -18,7 +18,7 @@ Supports (out of the box):
 - Custom project recipes
 
 ==============================================================================
-COMMANDS								*cook-commands*
+COMMANDS							*cook-commands*
 
 :Cook					Run the default command for current filetype.
 
@@ -50,7 +50,7 @@ require("cook").setup({
 ```
 
 ==============================================================================
-RECIPES               *cook-recipes*
+RECIPES							       *cook-recipes*
 
 Place a `recipes.lua` file in your project root (or repo with .git). Example:
 
@@ -70,15 +70,15 @@ You can also use `!` to run Neovim commands, like `!CMakeBuild` to trigger a cus
   build = "!CMakeBuild",
 ```
 
-=============================================================================
-MAPPINGS               *cook-mappings*
+==============================================================================
+MAPPINGS					               *cook-mappings*
 
 You can toggle the terminal with:
 `<Leader><leader>t``.
 In terminal mode, use `<Esc><Esc>` to exit to normal mode.
 
-=============================================================================
-CP MODE              *cook-cp*
+==============================================================================
+CP MODE							       *cook-cp*
 
 `:Coop` runs the current file and pipes clipboard input from a temp file:
 1. Clipboard -> `input.txt`
@@ -86,8 +86,8 @@ CP MODE              *cook-cp*
 
 Useful for competitive programming or quick tests.
 
-=============================================================================
-TROUBLESHOOTING       *cook-troubleshooting*
+==============================================================================
+TROUBLESHOOTING						       *cook-troubleshooting*
 
 - Ensure no conflicting mappings for `<leader><leader>t`.
 - If terminal doesn't open, check Neovim version (requires 0.7+).
