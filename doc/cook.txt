@@ -1,0 +1,99 @@
+*cook.txt*		Cook.nvim plugin manual
+
+			Author: 07CalC <https://github.com/07CalC>
+			Version: 1.0.0
+
+==============================================================================
+INTRODUCTION							*cook*
+
+Cook.nvim is a lightweight and extensible plugin to run or compile code based
+on filetype or per-project tasks - inside a terminal.
+
+Supports (out of the box):
+- Python
+- Rust
+- C / C++
+- JavaScript / TypeScript
+- Go
+- Custom project recipes
+
+==============================================================================
+COMMANDS								*cook-commands*
+
+:Cook					Run the default command for current filetype.
+
+:Cook {task}				Run a custom project task (see |cook-recipes|).
+
+:Coop					Run current file and pipe clipboard input (useful for CP).
+
+:Cookt / <leader><leader>t		Toggle the terminal window.
+
+==============================================================================
+SETUP								*cook-setup*
+
+Call `setup()` in your Neovim config to initialize:
+
+```lua
+require("cook").setup({
+  terminal = {
+    layout = "float",   -- or "bottom", "vertical"
+    width = 0.8,        -- used for floating and vertical layout
+    height = 0.3,       -- used for floating and bottom layout
+    border = "rounded", -- border style for floating terminal
+  },
+  runners = {
+    py = "python3 %s",
+    c = "gcc %s -o %s && %s",
+    -- Add your own mappings...
+  },
+})
+```
+
+==============================================================================
+RECIPES               *cook-recipes*
+
+Place a `recipes.lua` file in your project root (or repo with .git). Example:
+
+```lua
+return {
+  recipes = {
+    test = "pytest tests/",
+    build = "make",
+    deploy = "scp -r . user@server:/path/to/deploy",
+    build = "!CMakeBuild",
+  }
+}
+```
+Then use `:Cook test` to run the `pytest tests/` command.
+You can also use `!` to run Neovim commands, like `!CMakeBuild` to trigger a custom
+```lua
+  build = "!CMakeBuild",
+```
+
+=============================================================================
+MAPPINGS               *cook-mappings*
+
+You can toggle the terminal with:
+`<Leader><leader>t``.
+In terminal mode, use `<Esc><Esc>` to exit to normal mode.
+
+=============================================================================
+CP MODE              *cook-cp*
+
+`:Coop` runs the current file and pipes clipboard input from a temp file:
+1. Clipboard -> `input.txt`
+2. Run `./your_code < input.txt`
+
+Useful for competitive programming or quick tests.
+
+=============================================================================
+TROUBLESHOOTING       *cook-troubleshooting*
+
+- Ensure no conflicting mappings for `<leader><leader>t`.
+- If terminal doesn't open, check Neovim version (requires 0.7+).
+- If commands fail, verify your `runners` setup in `setup()`.
+- For custom recipes, ensure `recipes.lua` is in the project root or git repo.
+- If using custom commands, ensure they are executable in your environment.
+
+
+vim:tw=78:ts=8:noet:ft=help:norl:

@@ -60,6 +60,10 @@ use {
 
 ## 🔧 Usage
 
+```vim
+:help cook
+```
+
 ### Default
 
 In any buffer, simply run:
@@ -163,7 +167,7 @@ By default, `cook.nvim` opens a floating terminal, but you can change this behav
 
 ```lua
 require("cook").setup({
-  float = {
+  terminal = {
     layout = "float",   -- or "bottom", "vertical"
     width = 0.8,        -- used for floating and vertical layout
     height = 0.3,       -- used for floating and bottom layout
