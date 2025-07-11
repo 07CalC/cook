@@ -49,4 +49,22 @@ vim.keymap.set("t", "<leader><leader>t", function()
 	require("cook.executor").toggle_terminal()
 end, { desc = "Toggle Cook terminal (terminal mode)" })
 
+-- keymaps to run the current file with the configured runner
+vim.keymap.set("n", "<leader><leader>r", function()
+	commands.cook(vim.fn.expand("%:p"))
+end, {
+	desc = "Run current file with Cook",
+	noremap = true,
+	silent = true,
+})
+
+-- keymaps to run the current file with clipboard as input
+vim.keymap.set("n", "<leader><leader>p", function()
+	commands.Coop()
+end, {
+	desc = "Run current file with clipboard as input",
+	noremap = true,
+	silent = true,
+})
+
 return M
